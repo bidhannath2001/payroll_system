@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
@@ -45,3 +47,9 @@ Route::post('/logout', function () {
     session()->forget('employee');  // clear employee session
     return view('auth.login');       // redirect to login or welcome page
 })->name('logout');
+
+Route::get('/admin/admin',[DashboardController::class, 'admin'])->name('admin.admin');
+
+// Route::get('/admin/admin',function(){
+//     return view('admin.admin');
+// })->name('admin');
