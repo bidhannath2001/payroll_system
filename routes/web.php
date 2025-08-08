@@ -50,6 +50,6 @@ Route::post('/logout', function () {
 
 Route::get('/admin/admin',[DashboardController::class, 'admin'])->name('admin.admin');
 
-// Route::get('/admin/admin',function(){
-//     return view('admin.admin');
-// })->name('admin');
+Route::get('/admin/create', [EmployeeController::class, 'create'])->name('admin.create');
+
+Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');

@@ -16,7 +16,7 @@
                 <div class="collapse" id="employeeSubmenu">
                     <ul class="nav flex-column ms-4">
                         <li class="nav-item"><a class="nav-link" href="#">Employee List</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Add New</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('admin.create')}}">Add New</a></li>
                     </ul>
                 </div>
             </li>
