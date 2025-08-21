@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<h1>Employee profile</h1>
+{{-- <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
         <div>
             <h2 class="mb-0">Welcome, {{ $employee['name'] ?? 'Employee' }}</h2>
-            {{-- <p class="text-muted mb-0">Your Dashboard</p> --}}
+            <p class="text-muted mb-0">Your Dashboard</p>
         </div>
         <div class="mt-3 mt-md-0">
-            {{-- <a href="{{ route('employee.profile.edit') }}" class="btn btn-outline-info btn-sm me-2">Edit Profile</a> --}}
-            {{-- <form action="{{ route('logout') }}" method="POST" class="d-inline"> --}}
+            <a href="{{ route('employee.profile.edit') }}" class="btn btn-outline-info btn-sm me-2">Edit Profile</a>
+            <form action="{{ route('logout') }}" method="POST" class="d-inline">
                 @csrf
                 <button class="btn btn-outline-success btn-sm">Action</button>
             </form>
@@ -53,7 +54,7 @@
                                 <td>{{ $payslip['month'] }}</td>
                                 <td>{{ $payslip['year'] }}</td>
                                 <td>
-                                    {{-- <a href="{{ route('employee.payslip.download', $payslip['id']) }}" class="btn btn-sm btn-outline-primary">Download</a> --}}
+                                    <a href="{{ route('employee.payslip.download', $payslip['id']) }}" class="btn btn-sm btn-outline-primary">Download</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -63,5 +64,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
