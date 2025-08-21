@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('deductions', function (Blueprint $table) {
-            $table->id();
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id('role_id');
+            $table->string('role_name');
             $table->timestamps();
         });
     }
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('deductions');
+        Schema::dropIfExists('roles');
     }
 };

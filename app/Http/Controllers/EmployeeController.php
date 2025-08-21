@@ -4,11 +4,22 @@ use App\Models\Employee as ModelsEmployee;
 use Illuminate\Http\Request;
 class EmployeeController extends Controller
 {
+    public function home()
+    {
+        return view('employee.home');
+    }
     public function create()
     {
         return view('admin.create');
     }
-    
+
+    public function employeeList()
+    {
+        // Paginate data (10 per page)
+        $employees = ModelsEmployee::paginate(10);
+        return view('admin.employee_list', compact('employees'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -24,7 +35,7 @@ class EmployeeController extends Controller
             'bonus_eligibility' => 'nullable|string',
             'benefits' => 'nullable|string',
             'phone' => 'required|string|max:20',
-            'email' => 'required|email|max:150',
+            'email' => 'required|email|max:150|unique:employees,email',
             'password' => 'required|string|min:6|max:100',
             'address' => 'required|string',
             'emergency_contact_name' => 'required|string|max:150',
@@ -43,20 +54,5 @@ class EmployeeController extends Controller
 
         ModelsEmployee::create($validated);
         return redirect()->route('admin.admin')->with('success', 'Employee created successfully.');
-
-        // return redirect()->back()->with('success', 'Employee created successfully.');
     }
-    // public function home()
-    // {
-    //     $employee = session('employee');
-
-    //     if (!$employee) {
-    //         return redirect('/login');
-    //     }
-
-    //     $attendance = $employee['attendance'] ?? [];
-    //     $payslips = $employee['payslips'] ?? [];
-
-    //     return view('employee.home', compact('employee', 'attendance', 'payslips'));
-    // }
 }

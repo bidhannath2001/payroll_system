@@ -30,6 +30,7 @@
             </div>
         </div>
     @endif
+    <div class="container py-4">
         <h1 class="text-center mb-4">Employee Information Form</h1>
         <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data" id="employeeForm">
             @csrf
@@ -170,7 +171,7 @@
             </div>
         </form>
         </div>
-
+        </div>
         <!-- Optional JavaScript Alert -->
         <script>
             document.getElementById('employeeForm').addEventListener('submit', function(e) {

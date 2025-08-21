@@ -17,10 +17,10 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $primaryKey = 'user_id';
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'employee_id', 'username', 'password_hash',
+        'role_id', 'last_login', 'date_joined'
     ];
 
     /**
@@ -29,20 +29,28 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password_hash',
+        // 'remember_token',
     ];
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
+    }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
     /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    // protected function casts(): array
+    // {
+    //     return [
+    //         'email_verified_at' => 'datetime',
+    //         'password' => 'hashed',
+    //     ];
+    // }
 }

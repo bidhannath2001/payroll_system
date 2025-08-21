@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -12,8 +13,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attendences', function (Blueprint $table) {
-            $table->id();
+            $table->id('attendance_id');
+            $table->unsignedBigInteger('employee_id');
+            $table->date('date');
+            $table->time('check_in')->nullable();
+            $table->time('check_out')->nullable();
+            $table->decimal('working_hours', 5, 2)->default(0);
+            $table->enum('status', ['Present', 'Absent', 'Leave', 'Late']);
             $table->timestamps();
+
+            $table->foreign('employee_id')->references('employee_id')->on('employees')->onDelete('cascade');
         });
     }
 

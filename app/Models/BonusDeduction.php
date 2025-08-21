@@ -1,19 +1,18 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payroll extends Model
+class BonusDeduction extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'payroll_id';
+    protected $table = 'bonus_deductions';
 
     protected $fillable = [
-        'employee_id', 'month', 'year',
-        'gross_salary', 'total_deductions',
-        'bonuses', 'net_salary', 'generated_at'
+        'employee_id', 'type', 'amount', 'reason', 'date'
     ];
 
     public function employee()

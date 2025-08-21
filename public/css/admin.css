@@ -9,8 +9,11 @@ body {
 }
 
 .sidebar {
+    position: fixed;
     width: 250px;
-    flex-shrink: 0;
+    height: 100%;
+    /* flex-shrink: 0; */
+    z-index: 1;
     background-color: #fff;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
 }
@@ -30,6 +33,7 @@ body {
 }
 
 .main-content {
+    margin-left: 250px;
     flex-grow: 1;
     padding: 2rem;
 }
