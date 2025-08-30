@@ -41,6 +41,7 @@
                     <table class="table table-bordered table-striped table-hover align-middle">
                         <thead class="table-light">
                             <tr>
+                                <th>ID</th>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>DOB</th>
@@ -49,14 +50,14 @@
                                 <th>Department</th>
                                 <th>Joining Date</th>
                                 <th>Employment Type</th>
-                                <th>Salary Range</th>
-                                <th>Bonus Eligibility</th>
-                                <th>Benefits</th>
+                                {{-- <th>Salary Range</th>
+                                <th>Bonus Eligibility</th> --}}
+                                {{-- <th>Benefits</th> --}}
                                 <th>Phone</th>
                                 <th>Email</th>
                                 <th>Address</th>
-                                <th>Emergency Contact Name</th>
-                                <th>Emergency Contact Phone</th>
+                                {{-- <th>Emergency Contact Name</th>
+                                <th>Emergency Contact Phone</th> --}}
                                 <th>Resume</th>
                                 <th>ID Proof</th>
                             </tr>
@@ -64,10 +65,12 @@
                         <tbody>
                             @foreach ($employees as $emp)
                                 <tr>
+                                    <td>{{$emp->employee_id}}</td>
                                     <td>
                                         @if ($emp->id_proof)
-                                            <img src="{{ asset('storage/app/public/'.$emp->id_proof) }}" alt="Employee ID Proof"
-                                                style="width: 50px; height: 50px; object-fit: cover;">
+                                                <img src="{{ asset('storage/' . $emp->id_proof) }}"
+                                                    alt="Employee ID Proof"
+                                                    style="width: 30px; height: 30px; object-fit: cover;">
                                         @else
                                             N/A
                                         @endif
@@ -76,27 +79,29 @@
                                     <td>{{ $emp->dob }}</td>
                                     <td>{{ ucfirst($emp->gender) }}</td>
                                     <td>{{ $emp->designation }}</td>
-                                    <td>{{ $emp->department }}</td>
-                                    <td>{{ $emp->joining_date }}</td>
-                                    <td>{{ $emp->employment_type }}</td>
-                                    <td>{{ $emp->salary_range }}</td>
-                                    <td>{{ $emp->bonus_eligibility ? 'Yes' : 'No' }}</td>
-                                    <td>{{ $emp->benefits }}</td>
+                                    <td>{{ $emp->department ? $emp->department->department_name : 'N/A' }}</td>  
+                                    <td>{{ $emp->date_joined }}</td>
+                                    <td>{{ $emp->status }}</td>
+                                    {{-- <td>{{ $emp->salary_range }}</td> --}}
+                                    {{-- <td>{{ $emp->bonus_eligibility ? 'Yes' : 'No' }}</td> --}}
+                                    {{-- <td>{{ $emp->benefits }}</td> --}}
                                     <td>{{ $emp->phone }}</td>
                                     <td>{{ $emp->email }}</td>
                                     <td>{{ $emp->address }}</td>
-                                    <td>{{ $emp->emergency_contact_name }}</td>
-                                    <td>{{ $emp->emergency_contact_phone }}</td>
+                                    {{-- <td>{{ $emp->emergency_contact_name }}</td> --}}
+                                    {{-- <td>{{ $emp->emergency_contact_phone }}</td> --}}
                                     <td>
                                         @if ($emp->resume)
-                                            <a href="{{ asset('storage/app/public/'.$emp->resume) }}" target="_blank">View</a>
+                                            <a href="{{ asset('storage/app/public/' . $emp->resume) }}"
+                                                target="_blank">View</a>
                                         @else
                                             N/A
                                         @endif
                                     </td>
                                     <td>
                                         @if ($emp->id_proof)
-                                            <a href="{{ asset('storage/app/public/'.$emp->id_proof) }}" target="_blank">View</a>
+                                            <a href="{{ asset('storage/app/public/' . $emp->id_proof) }}"
+                                                target="_blank">View</a>
                                         @else
                                             N/A
                                         @endif

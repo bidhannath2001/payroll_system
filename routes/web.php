@@ -29,3 +29,6 @@ Route::get('/admin/create', [EmployeeController::class, 'create'])->name('admin.
 Route::get('/admin/employee_list', [EmployeeController::class, 'employeeList'])->name('admin.employee_list');
 
 Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
