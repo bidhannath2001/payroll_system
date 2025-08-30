@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password_hash');
             $table->unsignedBigInteger('role_id');
             $table->dateTime('last_login')->nullable();
-            $table->dateTime('date_joined');
+            $table->dateTime('date_joined')->nullable();
             
             $table->foreign('employee_id')->references('employee_id')->on('employees')->onDelete('cascade');
             

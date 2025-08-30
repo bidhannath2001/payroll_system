@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class Employee extends Model
 {
@@ -11,9 +13,20 @@ class Employee extends Model
     protected $primaryKey = 'employee_id';
 
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'dob', 'gender', 'address',
-        'phone', 'designation', 'department_id', 'role_id',
-        'date_joined', 'status', 'id_proof', 'resume'
+        'first_name',
+        'last_name',
+        'email',
+        'dob',
+        'gender',
+        'address',
+        'phone',
+        'designation',
+        'department_id',
+        'role_id',
+        'date_joined',
+        'status',
+        'id_proof',
+        'resume'
     ];
 
     public function department()
@@ -49,5 +62,20 @@ class Employee extends Model
     public function user()
     {
         return $this->hasOne(User::class, 'employee_id');
+    }
+
+    // Auto create user when employee is created
+    protected static function booted()
+    {
+        static::created(function ($employee) {
+            User::create([
+                'employee_id'   => $employee->employee_id,
+                'username'      => $employee->email,
+                'password_hash' => 'default123',
+                'date_joined'   => $employee->date_joined,
+                'role_id'       => $employee->role_id,
+                'last_login'    => null,
+            ]);
+        });
     }
 }

@@ -1,5 +1,5 @@
 <aside class="sidebar p-4 d-flex flex-column">
-    <h4 class="text-center text-primary fw-bold mb-4 border-bottom pb-3">PUC</h4>
+    <h4 class="text-center text-primary fw-bold mb-4 border-bottom pb-3">Payroll System</h4>
     <nav class="sidebar-nav">
         <ul class="nav flex-column">
 
