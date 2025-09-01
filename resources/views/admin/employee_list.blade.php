@@ -65,12 +65,11 @@
                         <tbody>
                             @foreach ($employees as $emp)
                                 <tr>
-                                    <td>{{$emp->employee_id}}</td>
+                                    <td>{{ $emp->employee_id }}</td>
                                     <td>
                                         @if ($emp->id_proof)
-                                                <img src="{{ asset('storage/' . $emp->id_proof) }}"
-                                                    alt="Employee ID Proof"
-                                                    style="width: 30px; height: 30px; object-fit: cover;">
+                                            <img src="{{ asset('storage/' . $emp->id_proof) }}" alt="Employee ID Proof"
+                                                style="width: 30px; height: 30px; object-fit: cover;">
                                         @else
                                             N/A
                                         @endif
@@ -79,7 +78,7 @@
                                     <td>{{ $emp->dob }}</td>
                                     <td>{{ ucfirst($emp->gender) }}</td>
                                     <td>{{ $emp->designation }}</td>
-                                    <td>{{ $emp->department ? $emp->department->department_name : 'N/A' }}</td>  
+                                    <td>{{ $emp->department ? $emp->department->department_name : 'N/A' }}</td>
                                     <td>{{ $emp->date_joined }}</td>
                                     <td>{{ $emp->status }}</td>
                                     {{-- <td>{{ $emp->salary_range }}</td> --}}
@@ -113,8 +112,11 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="d-flex justify-content-between">
-                    {{ $employees->links() }}
+                <div class="d-flex justify-content-center">
+                    <nav aria-label="Page navigation">
+                        {{ $employees->links('pagination::bootstrap-4') }}
+                    </nav>
+
                 </div>
             </div>
         </div>
