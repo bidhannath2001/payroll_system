@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AttendenceController;
 use Illuminate\Http\Request;
 
 Route::post('/logout', function () {
@@ -29,6 +30,15 @@ Route::get('/admin/create', [EmployeeController::class, 'create'])->name('admin.
 Route::get('/admin/employee_list', [EmployeeController::class, 'employeeList'])->name('admin.employee_list');
 
 Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
+
+// Attendance Routes
+Route::prefix('admin/attendance')->group(function () {
+    Route::get('/', [AttendenceController::class, 'index'])->name('attendance.index');
+    Route::post('/store', [AttendenceController::class, 'store'])->name('attendance.store');
+});
+
+
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
