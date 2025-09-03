@@ -10,7 +10,7 @@
     <style>
         body { font-family: 'Poppins', sans-serif; }
         table th, table td { text-align: center; vertical-align: middle; }
-        .main-content { margin-left: 250px; padding: 20px; } /* adjust if your sidebar width differs */
+        .main-content { margin-left: 250px; padding: 20px; } 
     </style>
 </head>
 <body>
