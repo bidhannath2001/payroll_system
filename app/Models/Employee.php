@@ -49,9 +49,9 @@ class Employee extends Model
         return $this->hasMany(Salary::class, 'employee_id');
     }
 
-    public function attendances()
+     public function attendances()
     {
-        return $this->hasMany(Attendance::class, 'employee_id');
+        return $this->hasMany(Attendence::class, 'employee_id', 'employee_id');
     }
 
     public function bonusDeductions()
