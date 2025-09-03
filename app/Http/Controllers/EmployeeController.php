@@ -9,14 +9,23 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Expr\Cast\String_;
 
 class EmployeeController extends Controller
 {
-    public function home()
-    {
-        return view('employee.home');
+    public function index(){
+        $employees = Employee::all();
+        $departments = Department::all();
+        $roles = Role::all(); 
     }
-
+    // public function home()
+    // {
+    //     $user = session('user');
+    //     // $employee = Employee::all();
+    //     // $department = Department::all();
+    //     return view('employee.home',compact('user'));
+    // }
+    
     public function create()
     {
         $departments = Department::all();
@@ -37,7 +46,7 @@ class EmployeeController extends Controller
         //debug
         // dd($validated);
         // Create employee
-        $employee = Employee::create($validated);
+        Employee::create($validated);
 
         return redirect()->route('admin.admin')->with('success', 'Employee account created successfully.');
     }

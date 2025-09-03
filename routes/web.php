@@ -5,23 +5,19 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AttendenceController;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
-Route::post('/logout', function () {
-    session()->forget('employee');  // clear employee session
-    return view('auth.login');       // redirect to login or welcome page
-})->name('logout');
-
-// Show login page
-// Route::get('/login', function () {
-//     return view('auth.login');
-// })->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/loginsubmit', [AuthController::class, 'loginSubmit'])->name('login.submit');
 
-Route::get('/employee/home', [EmployeeController::class, 'home'])->name('employee.home');
+Route::get('/employee/home', [AuthController::class, 'home'])->name('employee.home');
+
+Route::get('/employee/edit_profile', [AuthController::class, 'edit_profile'])->name('employee.edit_profile');
+Route::put('/employee/edit_profile', [AuthController::class, 'update_profile'])->name('employee.update_profile');
 
 Route::get('/admin/admin',[DashboardController::class, 'admin'])->name('admin.admin');
 
@@ -36,8 +32,6 @@ Route::prefix('admin/attendance')->group(function () {
     Route::get('/', [AttendenceController::class, 'index'])->name('attendance.index');
     Route::post('/store', [AttendenceController::class, 'store'])->name('attendance.store');
 });
-
-
 
 Route::get('/', function () {
     return view('welcome');
