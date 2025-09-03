@@ -72,11 +72,13 @@
             </li>
 
             {{-- Attendance --}}
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('attendance.*') ? 'active rounded' : '' }}" href="#">
-                    <i class="bi bi-clock-fill me-2"></i>Attendance
-                </a>
-            </li>
+<li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('attendance.index') ? 'active rounded' : '' }}" 
+       href="{{ route('attendance.index') }}">
+        <i class="bi bi-clock-fill me-2"></i>Attendance
+    </a>
+</li>
+
 
             {{-- Setting --}}
             <li class="nav-item">

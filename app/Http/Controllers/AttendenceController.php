@@ -13,12 +13,14 @@ class AttendenceController extends Controller
     {
         $attendances = Attendence::with('employee')->orderBy('date', 'desc')->get();
         $employees = Employee::all(); // for the form
+        // dd($employees);
         return view('admin.attendance', compact('attendances', 'employees'));
     }
 
     // Store new attendance
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate([
             'employee_id' => 'required|exists:employees,employee_id',
             'date' => 'required|date',
