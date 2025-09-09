@@ -124,4 +124,7 @@ class AuthController extends Controller
                 ->with('success', 'Profile updated successfully. Your previous password is kept.');
         }
     }
+    public function leave_request(){
+        return view('employee.leave_request');
+    }
 }

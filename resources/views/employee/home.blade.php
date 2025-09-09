@@ -20,6 +20,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     @if (session()->has('user'))
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="leaveDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Leave Request
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="leaveDropdown">
+                                <li><a class="dropdown-item" href="{{ route('employee.leave_request') }}">New
+                                        Request</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ route('employee.leave_request_history') }}">Request History</a></li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('employee.edit_profile') }}">Profile</a>
                         </li>
@@ -67,7 +80,8 @@
                         <div class="card-body p-4 text-start">
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <p><strong>Name:</strong> {{ $employee->first_name }} {{ $employee->last_name }}</p>
+                                    <p><strong>Name:</strong> {{ $employee->first_name }} {{ $employee->last_name }}
+                                    </p>
                                 </div>
                                 <div class="col-md-6">
                                     <p><strong>Email:</strong> {{ $employee->email }}</p>
