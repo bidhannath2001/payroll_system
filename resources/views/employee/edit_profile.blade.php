@@ -10,6 +10,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
 </head>
 
 <body>
@@ -39,7 +41,17 @@
             @csrf
             @method('PUT') {{-- Spoof PUT method --}}
             <div class="card shadow-lg border-0 rounded-3 mx-auto" style="max-width: 800px;">
-                <h3 class="text-center mt-4 mb-4">Update Your Profile</h3>
+                <div
+                    class="card-header bg-primary text-white d-flex align-items-center justify-content-between fs-5 fw-bold">
+                    <!-- Back button -->
+                    <a href="{{ route('employee.home') }}" class="text-white text-decoration-none" data-toggle="tooltip"
+                        data-placement="bottom" title="Back">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                    <span class="mx-auto">Update Your Profile</span>
+                    <span></span>
+                </div>
+
 
                 <div class="text-center mt-4">
                     {{-- Profile Image --}}
@@ -127,7 +139,7 @@
                 </div>
 
                 {{-- Submit --}}
-                <div class="text-center mt-4">
+                <div class="text-center mt-4 mb-4">
                     <button type="submit" class="btn btn-lg btn-primary">Update Profile</button>
                 </div>
             </div>

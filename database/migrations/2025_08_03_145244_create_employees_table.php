@@ -28,6 +28,7 @@ return new class extends Migration
 
             $table->date('date_joined');
             $table->string('status')->default('active'); // e.g. active = full time, inactive = part time
+            $table->integer('available_leave')->default(15);
             $table->string('id_proof')->nullable();
             $table->string('resume')->nullable();
             $table->timestamps();
