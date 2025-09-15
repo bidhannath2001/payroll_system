@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
         Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
         Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
+        Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit');
+        Route::put('/jobs/{job}', [JobController::class, 'update'])->name('jobs.update');
     });
 
     // Employee-specific profile
