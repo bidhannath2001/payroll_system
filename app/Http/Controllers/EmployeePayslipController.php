@@ -19,7 +19,7 @@ class EmployeePayslipController extends Controller
         
         $payrolls = Payroll::where('employee_id', $employeeId)
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(20);
             
         // Add month names to each payroll record
         $payrolls->getCollection()->transform(function ($payroll) {
