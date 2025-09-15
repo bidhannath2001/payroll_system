@@ -46,7 +46,7 @@ class LeaveRequestController extends Controller
         $user = session('user');
         $employee = Employee::find($user->employee_id);
         $leaveRequests = LeaveRequest::where('employee_id', $employee->employee_id)->get();
-        return view('employee.leave_request_history', compact('leaveRequests'));
+        return view('employee.leave_request_history', compact('leaveRequests','employee'));
     }
     public function adminIndex()
     {

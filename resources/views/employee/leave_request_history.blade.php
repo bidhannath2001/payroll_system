@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Leave Request</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -57,16 +57,16 @@
                                     <td>{{ \Carbon\Carbon::parse($leave->start_date)->format('d M Y') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($leave->end_date)->format('d M Y') }}</td>
                                     <td>{{ $leave->reason }}</td>
-                                    <td>{{ $leave->available_leaves }}</td>
+                                    <td>{{ $employee->available_leave }}</td>
                                     <td>
-                                        @if ($leave->status == 'approved')
-                                            <span class="badge bg-success">Approved</span>
-                                        @elseif($leave->status == 'pending')
-                                            <span class="badge bg-warning text-dark">Pending</span>
-                                        @elseif($leave->status == 'rejected')
-                                            <span class="badge bg-danger">Rejected</span>
+                                        @if ($leave->status == 'Approved')
+                                            <span class="badge bg-success" style="color: white">Approved</span>
+                                        @elseif($leave->status == 'Pending')
+                                            <span class="badge bg-warning text-dark" style="color: white">Pending</span>
+                                        @elseif($leave->status == 'Rejected')
+                                            <span class="badge bg-danger" style="color: white">Rejected</span>
                                         @else
-                                            <span class="badge bg-secondary">{{ ucfirst($leave->status) }}</span>
+                                            <span class="badge bg-secondary" style="color: white">{{ ucfirst($leave->status) }}</span>
                                         @endif
                                     </td>
                                 </tr>
@@ -86,8 +86,8 @@
     <style>
         .table-hover tbody tr:hover {
             background: #f1f5f9;
-            transform: scale(1.02);
-            transition: all 0.2s ease-in-out;
+            /* transform: scale(1.02);
+            transition: all 0.2s ease-in-out; */
         }
     </style>
     <!-- Optional JavaScript -->
