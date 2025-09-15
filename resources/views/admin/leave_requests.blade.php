@@ -58,7 +58,7 @@
                                 @forelse($pendingRequests as $leave)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $leave->employee->name }}</td>
+                                        <td>{{ $leave->employee->first_name}}</td>
                                         <td>{{ $leave->leave_type }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->start_date)->format('d M Y') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->end_date)->format('d M Y') }}</td>
@@ -116,7 +116,7 @@
                                 @forelse($approvedRequests as $leave)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $leave->employee->name }}</td>
+                                        <td>{{ $leave->employee->first_name }}</td>
                                         <td>{{ $leave->leave_type }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->start_date)->format('d M Y') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->end_date)->format('d M Y') }}</td>
@@ -160,7 +160,7 @@
                                 @forelse($rejectedRequests as $leave)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $leave->employee->name }}</td>
+                                        <td>{{ $leave->employee->first_name }}</td>
                                         <td>{{ $leave->leave_type }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->start_date)->format('d M Y') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->end_date)->format('d M Y') }}</td>

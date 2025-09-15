@@ -72,19 +72,19 @@
                             <h5>Employee Information</h5>
                             <table class="table table-borderless">
                                 <tr>
-                                    <td><strong>Name:</strong></td>
+                                    <td><strong>Name  : </strong></td>
                                     <td>{{ $payroll->employee->first_name }} {{ $payroll->employee->last_name }}</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Designation:</strong></td>
+                                    <td><strong>Designation :</strong></td>
                                     <td>{{ $payroll->employee->designation }}</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Department:</strong></td>
+                                    <td><strong>Department :</strong></td>
                                     <td>{{ $payroll->employee->department->name ?? 'N/A' }}</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Email:</strong></td>
+                                    <td><strong>Email :</strong></td>
                                     <td>{{ $payroll->employee->email }}</td>
                                 </tr>
                             </table>
@@ -93,11 +93,11 @@
                             <h5>Payroll Information</h5>
                             <table class="table table-borderless">
                                 <tr>
-                                    <td><strong>Period:</strong></td>
+                                    <td><strong>Period :</strong></td>
                                     <td>{{ $payroll->month_name }} {{ $payroll->year }}</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Generated At:</strong></td>
+                                    <td><strong>Generated At :</strong></td>
                                     <td>{{ \Carbon\Carbon::parse($payroll->generated_at)->format('M d, Y H:i') }}</td>
                                 </tr>
                             </table>
@@ -112,15 +112,15 @@
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
-                                        <td><strong>Present Days:</strong></td>
+                                        <td><strong>Present Days</strong></td>
                                         <td class="text-right">{{ $presentDays ?? 0 }}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Absent Days:</strong></td>
+                                        <td><strong>Absent Days</strong></td>
                                         <td class="text-right">{{ $absentDays ?? 0 }}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Total Working Days:</strong></td>
+                                        <td><strong>Total Working Days</strong></td>
                                         <td class="text-right">{{ $totalDays ?? 0 }}</td>
                                     </tr>
                                 </tbody>
@@ -131,19 +131,19 @@
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
-                                        <td><strong>Basic Salary:</strong></td>
+                                        <td><strong>Basic Salary </strong></td>
                                         <td class="text-right">${{ number_format($salary->basic_salary ?? 0, 2) }}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Allowances:</strong></td>
+                                        <td><strong>Allowances </strong></td>
                                         <td class="text-right">${{ number_format($salary->allowances ?? 0, 2) }}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Base Deductions:</strong></td>
+                                        <td><strong>Base Deductions </strong></td>
                                         <td class="text-right">${{ number_format($salary->deductions ?? 0, 2) }}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Tax Percentage:</strong></td>
+                                        <td><strong>Tax Percentage</strong></td>
                                         <td class="text-right">{{ $salary->tax_percentage ?? 0 }}%</td>
                                     </tr>
                                 </tbody>
