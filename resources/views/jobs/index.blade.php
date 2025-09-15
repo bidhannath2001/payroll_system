@@ -39,6 +39,11 @@
                 @endforelse
             </tbody>
         </table>
+
+        <div class="mt-4">
+            <h3>Salary Distribution by Department</h3>
+            <canvas id="salaryChart" height="200"></canvas>
+        </div>
     </div>
 
     <!-- Create Job Modal -->
@@ -113,6 +118,7 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function() {
             $('#jobsTable').DataTable({
@@ -132,6 +138,47 @@
                     $('#editForm').attr('action', `/admin/jobs/${data.id}`);
                     $('#editJobModal').modal('show');
                 });
+            });
+
+            // Initialize Salary Distribution Chart
+            const ctx = document.getElementById('salaryChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        @foreach($jobs->groupBy('department_id') as $deptId => $group)
+                            '{{ \App\Models\Department::find($deptId)->department_name ?? $deptId }}',
+                        @endforeach
+                    ],
+                    datasets: [{
+                        label: 'Average Salary',
+                        data: [
+                            @foreach($jobs->groupBy('department_id') as $group)
+                                {{ number_format($group->avg('salary_range') ?? 0, 2) }},
+                            @endforeach
+                        ],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Average Salary ($)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Department'
+                            }
+                        }
+                    }
+                }
             });
         });
     </script>
