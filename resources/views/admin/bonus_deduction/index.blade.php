@@ -67,7 +67,7 @@
                                             <span class="badge badge-danger">{{ $record->type }}</span>
                                         @endif
                                     </td>
-                                    <td>${{ number_format($record->amount, 2) }}</td>
+                                    <td>Tk. {{ number_format($record->amount, 2) }}</td>
                                     <td>{{ $record->reason ?? 'N/A' }}</td>
                                     <td>{{ \Carbon\Carbon::parse($record->date)->format('M d, Y') }}</td>
                                     <td>{{ $record->created_at->format('M d, Y') }}</td>

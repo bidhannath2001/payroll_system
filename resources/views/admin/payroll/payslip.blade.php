@@ -210,11 +210,11 @@
                 <div class="info-section">
                     <h4>Base Salary Info</h4>
                     <div class="info-row">
-                        <div class="info-label">Basic Salary: ${{ number_format($salary->basic_salary ?? 0, 2) }}</div>
+                        <div class="info-label">Basic Salary: Tk. {{ number_format($salary->basic_salary ?? 0, 2) }}</div>
                         <!-- <div class="info-value">${{ number_format($salary->basic_salary ?? 0, 2) }}</div> -->
                     </div>
                     <div class="info-row">
-                        <div class="info-label">Allowances: ${{ number_format($salary->allowances ?? 0, 2) }}</div>
+                        <div class="info-label">Allowances: Tk. {{ number_format($salary->allowances ?? 0, 2) }}</div>
                         <!-- <div class="info-value">${{ number_format($salary->allowances ?? 0, 2) }}</div> -->
                     </div>
                     <div class="info-row">
@@ -271,7 +271,7 @@
                 </tr>
                 <tr class="net-salary-row">
                     <td><strong>NET SALARY</strong></td>
-                    <td class="text-right"><strong>${{ number_format($payroll->net_salary, 2) }}</strong></td>
+                    <td class="text-right"><strong>Tk. {{ number_format($payroll->net_salary, 2) }}</strong></td>
                 </tr>
             </tbody>
         </table>
@@ -292,7 +292,7 @@
                     <tr>
                         <td>{{ \Carbon\Carbon::parse($bonus->date)->format('M d, Y') }}</td>
                         <td>{{ $bonus->reason ?? 'N/A' }}</td>
-                        <td class="text-right">${{ number_format($bonus->amount, 2) }}</td>
+                        <td class="text-right">Tk. {{ number_format($bonus->amount, 2) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -316,7 +316,7 @@
                     <tr>
                         <td>{{ \Carbon\Carbon::parse($deduction->date)->format('M d, Y') }}</td>
                         <td>{{ $deduction->reason ?? 'N/A' }}</td>
-                        <td class="text-right">${{ number_format($deduction->amount, 2) }}</td>
+                        <td class="text-right">Tk. {{ number_format($deduction->amount, 2) }}</td>
                     </tr>
                     @endforeach
                 </tbody>

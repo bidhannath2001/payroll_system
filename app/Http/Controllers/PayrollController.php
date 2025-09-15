@@ -17,7 +17,7 @@ class PayrollController extends Controller
     {
         $payrolls = Payroll::with('employee')
             ->orderBy('generated_at', 'desc')
-            ->paginate(10);
+            ->paginate(20);
             
         // Add month names to each payroll record
         $payrolls->getCollection()->transform(function ($payroll) {
