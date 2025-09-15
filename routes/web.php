@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
         Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit');
         Route::put('/jobs/{job}', [JobController::class, 'update'])->name('jobs.update');
+        Route::get('/jobs/download', [JobController::class, 'downloadCSV'])->name('jobs.downloadCSV');
     });
 
     // Employee-specific profile
