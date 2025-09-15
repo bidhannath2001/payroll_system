@@ -67,10 +67,10 @@
                                         <small class="text-muted">{{ $payroll->employee->designation }}</small>
                                     </td>
                                     <td>{{ $payroll->month_name }} {{ $payroll->year }}</td>
-                                    <td>${{ number_format($payroll->gross_salary, 2) }}</td>
-                                    <td>${{ number_format($payroll->total_deductions, 2) }}</td>
-                                    <td>${{ number_format($payroll->bonuses, 2) }}</td>
-                                    <td><strong>${{ number_format($payroll->net_salary, 2) }}</strong></td>
+                                    <td>Tk. {{ number_format($payroll->gross_salary, 2) }}</td>
+                                    <td>Tk. {{ number_format($payroll->total_deductions, 2) }}</td>
+                                    <td>Tk. {{ number_format($payroll->bonuses, 2) }}</td>
+                                    <td><strong>Tk. {{ number_format($payroll->net_salary, 2) }}</strong></td>
                                     <td>{{ \Carbon\Carbon::parse($payroll->generated_at)->format('M d, Y H:i') }}</td>
                                     <td>
                                         <div class="btn-group" role="group">
