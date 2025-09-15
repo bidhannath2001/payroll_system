@@ -42,6 +42,30 @@
                 </a>
             </li>
 
+            {{-- Salary Management --}}
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.salary.*') ? 'active rounded' : '' }}"
+                   href="{{ route('admin.salary.index') }}">
+                    <i class="bi bi-currency-dollar me-2"></i>Salary
+                </a>
+            </li>
+
+            {{-- Bonus/Deduction --}}
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.bonus_deduction.*') ? 'active rounded' : '' }}"
+                   href="{{ route('admin.bonus_deduction.index') }}">
+                    <i class="bi bi-plus-circle me-2"></i>Bonus/Deduction
+                </a>
+            </li>
+
+            {{-- Payroll --}}
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.payroll.*') ? 'active rounded' : '' }}"
+                   href="{{ route('admin.payroll.index') }}">
+                    <i class="bi bi-receipt me-2"></i>Payroll
+                </a>
+            </li>
+
             {{-- Setting --}}
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('settings.*') ? 'active rounded' : '' }}" href="#">

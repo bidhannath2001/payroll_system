@@ -16,6 +16,14 @@ class Payroll extends Model
         'bonuses', 'net_salary', 'generated_at'
     ];
 
+    protected $casts = [
+        'generated_at' => 'datetime',
+        'gross_salary' => 'decimal:2',
+        'total_deductions' => 'decimal:2',
+        'bonuses' => 'decimal:2',
+        'net_salary' => 'decimal:2',
+    ];
+
     public function employee()
     {
         return $this->belongsTo(Employee::class, 'employee_id');

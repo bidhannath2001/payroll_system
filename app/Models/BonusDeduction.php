@@ -15,6 +15,11 @@ class BonusDeduction extends Model
         'employee_id', 'type', 'amount', 'reason', 'date'
     ];
 
+    protected $casts = [
+        'date' => 'date',
+        'amount' => 'decimal:2',
+    ];
+
     public function employee()
     {
         return $this->belongsTo(Employee::class, 'employee_id');

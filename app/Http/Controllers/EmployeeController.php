@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\Cast\String_;
 
 class EmployeeController extends Controller
@@ -50,4 +51,25 @@ class EmployeeController extends Controller
 
         return redirect()->route('admin.admin')->with('success', 'Employee account created successfully.');
     }
+
+   public function showProfile()
+{
+    $userId = Auth::id(); // assuming user_id = employee_id
+    $employee = Employee::where('employee_id', $userId)->first();
+
+    if ($employee) {
+        $attendances = $employee->attendances()->get();
+        $presentDays = $attendances->where('status', 'Present')->count();
+        $absentDays  = $attendances->where('status', 'Absent')->count();
+        $lastCheckIn = $attendances->sortByDesc('date')->first()?->check_in;
+    } else {
+        $presentDays = $absentDays = 0;
+        $lastCheckIn = null;
+    }
+
+    return view('employee.profile', compact(
+        'employee', 'presentDays', 'absentDays', 'lastCheckIn'
+    ));
+}
+
 }
