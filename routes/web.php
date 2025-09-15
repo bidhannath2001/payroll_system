@@ -91,3 +91,9 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+
+//job
+Route::get('/job.create', [JobController::class, 'create'])->name('jobs.create');
+Route::get('/job.index', [JobController::class, 'jobDesk'])->name('jobs.index');
+Route::post('/job.create', [JobController::class, 'store'])->name('jobs.store');

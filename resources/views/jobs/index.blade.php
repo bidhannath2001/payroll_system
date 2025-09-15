@@ -1,185 +1,60 @@
-@extends('layouts.app')
-
-@section('content')
-    <div class="container mt-4">
-        <h1>Job Desk Hub</h1>
-        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createJobModal">Add New Job</button>
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-        <table id="jobsTable" class="table table-striped table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Designation</th>
-                    <th>Department</th>
-                    <th>Salary Range</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($jobs as $job)
-                    <tr>
-                        <td>{{ $job->designation ?? 'N/A' }}</td>
-                        <td>{{ optional($job->department)->department_name ?? $job->department_id ?? 'N/A' }}</td>
-                        <td>{{ $job->salary_range ?? 'N/A' }}</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm edit-btn" data-id="{{ $job->id }}" data-bs-toggle="modal" data-bs-target="#editJobModal">Edit</button>
-                            <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" style="display:inline;"
-                                  onsubmit="return confirm('Are you sure you want to delete this job?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="text-center">No jobs available.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-
-        <div class="mt-4">
-            <h3>Salary Distribution by Department</h3>
-            <canvas id="salaryChart" height="200"></canvas>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <style>
+        tr, th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>Job Desk</h3>
+            <a href="{{ route('jobs.create') }}" class="btn btn-primary">Create New Job</a>
         </div>
-    </div>
 
-    <!-- Create Job Modal -->
-    <div class="modal fade" id="createJobModal" tabindex="-1" aria-labelledby="createJobModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createJobModalLabel">Add New Job</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('jobs.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="designation" class="form-label">Designation</label>
-                            <input type="text" class="form-control" id="designation" name="designation" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="department_id" class="form-label">Department</label>
-                            <select class="form-control" id="department_id" name="department_id" required>
-                                @foreach(\App\Models\Department::all() as $dept)
-                                    <option value="{{ $dept->department_id }}">{{ $dept->department_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="salary_range" class="form-label">Salary Range</label>
-                            <input type="text" class="form-control" id="salary_range" name="salary_range" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive" style="overflow-x: auto; white-space: nowrap; max-width:100%;">
+                    <table class="table table-bordered table-striped table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Salary</th>
+                                <th>Department</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($jobs as $job)
+                            <tr>
+                                <td>{{ $job->id }}</td>
+                                <td>{{ $job->title }}</td>
+                                <td>{{ $job->description }}</td>
+                                <td>${{ number_format($job->salary) }}</td>
+                                <td>{{ $job->department }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-muted">No jobs found.</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Edit Job Modal -->
-    <div class="modal fade" id="editJobModal" tabindex="-1" aria-labelledby="editJobModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editJobModalLabel">Edit Job</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" id="editForm" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" id="editId" name="id">
-                        <div class="mb-3">
-                            <label for="editDesignation" class="form-label">Designation</label>
-                            <input type="text" class="form-control" id="editDesignation" name="designation" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editDepartmentId" class="form-label">Department</label>
-                            <select class="form-control" id="editDepartmentId" name="department_id" required>
-                                @foreach(\App\Models\Department::all() as $dept)
-                                    <option value="{{ $dept->department_id }}">{{ $dept->department_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editSalaryRange" class="form-label">Salary Range</label>
-                            <input type="text" class="form-control" id="editSalaryRange" name="salary_range" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
-
-@section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#jobsTable').DataTable({
-                "pageLength": 10,
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                "order": [[0, 'asc']] // Default sort by designation
-            });
-
-            // Populate edit modal with job data
-            $('.edit-btn').on('click', function() {
-                var jobId = $(this).data('id');
-                $.get(`/admin/jobs/${jobId}/edit`, function(data) {
-                    $('#editId').val(data.id);
-                    $('#editDesignation').val(data.designation);
-                    $('#editDepartmentId').val(data.department_id);
-                    $('#editSalaryRange').val(data.salary_range);
-                    $('#editForm').attr('action', `/admin/jobs/${data.id}`);
-                    $('#editJobModal').modal('show');
-                });
-            });
-
-            // Initialize Salary Distribution Chart
-            const ctx = document.getElementById('salaryChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        @foreach($jobs->groupBy('department_id') as $deptId => $group)
-                            '{{ \App\Models\Department::find($deptId)->department_name ?? $deptId }}',
-                        @endforeach
-                    ],
-                    datasets: [{
-                        label: 'Average Salary',
-                        data: [
-                            @foreach($jobs->groupBy('department_id') as $group)
-                                {{ number_format($group->avg('salary_range') ?? 0, 2) }},
-                            @endforeach
-                        ],
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Average Salary ($)'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Department'
-                            }
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-@endsection
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
