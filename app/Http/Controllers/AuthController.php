@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Attendence;
 use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -53,7 +53,33 @@ class AuthController extends Controller
         }
         $employee = Employee::find($user->employee_id);
 
-        return view('employee.home', compact('user', 'employee'));
+        // Get attendance data for current month
+        $currentMonth = now()->month;
+        $currentYear = now()->year;
+        
+        $attendance = Attendence:: where('employee_id', $employee->employee_id)
+            ->whereMonth('date', $currentMonth)
+            ->whereYear('date', $currentYear)
+            ->get();
+
+        $presentDays = $attendance->where('status', 'Present')->count();
+        $absentDays = $attendance->where('status', 'Absent')->count();
+        
+        // If no attendance records, show default values
+        if ($attendance->count() == 0) {
+            $presentDays = 30; // Assume 30 days worked if no attendance records
+            $absentDays = 0;
+        }
+        
+        // Get last check-in
+        $lastCheckIn = Attendence::where('employee_id', $employee->employee_id)
+            ->where('status', 'Present')
+            ->orderBy('date', 'desc')
+            ->first();
+
+        $lastCheckInDate = $lastCheckIn ? $lastCheckIn->date : null;
+
+        return view('employee.home', compact('user', 'employee', 'presentDays', 'absentDays', 'lastCheckInDate'));
     }
 
 

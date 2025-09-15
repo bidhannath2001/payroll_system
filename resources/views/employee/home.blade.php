@@ -34,6 +34,9 @@
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('employee.payslip.index') }}">My Payslips</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('employee.edit_profile') }}">Profile</a>
                         </li>
                         <li class="nav-item">
@@ -164,9 +167,9 @@
                     <div class="card shadow-sm h-100">
                         <div class="card-header bg-success text-white">Attendance</div>
                         <div class="card-body">
-                            <p><strong>Present Days:</strong> --</p>
-                            <p><strong>Absent Days:</strong> --</p>
-                            <p><strong>Last Check-In:</strong> --</p>
+                            <p><strong>Present Days:</strong> {{ $presentDays ?? 0 }} </p>
+                            <p><strong>Absent Days:</strong> {{ $absentDays ?? 0 }} </p>
+                            <p><strong>Last Check-In:</strong> {{ $lastCheckInDate ? \Carbon\Carbon::parse($lastCheckInDate)->format('M d, Y') : 'N/A' }} </p>
                         </div>
                     </div>
                 </div>
