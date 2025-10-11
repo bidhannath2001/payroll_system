@@ -14,19 +14,12 @@ use PhpParser\Node\Expr\Cast\String_;
 
 class EmployeeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $employees = Employee::all();
         $departments = Department::all();
-        $roles = Role::all(); 
+        $roles = Role::all();
     }
-    // public function home()
-    // {
-    //     $user = session('user');
-    //     // $employee = Employee::all();
-    //     // $department = Department::all();
-    //     return view('employee.home',compact('user'));
-    // }
-    
     public function create()
     {
         $departments = Department::all();
@@ -52,24 +45,26 @@ class EmployeeController extends Controller
         return redirect()->route('admin.admin')->with('success', 'Employee account created successfully.');
     }
 
-   public function showProfile()
-{
-    $userId = Auth::id(); // assuming user_id = employee_id
-    $employee = Employee::where('employee_id', $userId)->first();
+    public function showProfile()
+    {
+        $userId = Auth::id(); // assuming user_id = employee_id
+        $employee = Employee::where('employee_id', $userId)->first();
 
-    if ($employee) {
-        $attendances = $employee->attendances()->get();
-        $presentDays = $attendances->where('status', 'Present')->count();
-        $absentDays  = $attendances->where('status', 'Absent')->count();
-        $lastCheckIn = $attendances->sortByDesc('date')->first()?->check_in;
-    } else {
-        $presentDays = $absentDays = 0;
-        $lastCheckIn = null;
+        if ($employee) {
+            $attendances = $employee->attendances()->get();
+            $presentDays = $attendances->where('status', 'Present')->count();
+            $absentDays  = $attendances->where('status', 'Absent')->count();
+            $lastCheckIn = $attendances->sortByDesc('date')->first()?->check_in;
+        } else {
+            $presentDays = $absentDays = 0;
+            $lastCheckIn = null;
+        }
+
+        return view('employee.profile', compact(
+            'employee',
+            'presentDays',
+            'absentDays',
+            'lastCheckIn'
+        ));
     }
-
-    return view('employee.profile', compact(
-        'employee', 'presentDays', 'absentDays', 'lastCheckIn'
-    ));
-}
-
 }
