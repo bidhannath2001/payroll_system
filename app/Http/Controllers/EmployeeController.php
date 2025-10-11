@@ -14,9 +14,27 @@ use PhpParser\Node\Expr\Cast\String_;
 
 class EmployeeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $employees = Employee::all();
+        $search = $request->input('search');
+
+        $employees = Employee::with('department')
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('first_name', 'like', "%{$search}%")
+                        ->orWhere('last_name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhere('phone', 'like', "%{$search}%")
+                        ->orWhere('designation', 'like', "%{$search}%")
+                        ->orWhereHas('department', function ($d) use ($search) {
+                            $d->where('department_name', 'like', "%{$search}%");
+                        });
+                });
+            })
+            ->paginate(10);
+
+        return view('admin.employee_list', compact('employees'));
+        // $employees = Employee::all();
         $departments = Department::all();
         $roles = Role::all();
     }
