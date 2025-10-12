@@ -10,10 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
     <style>
-        tr,
-        th {
-            text-align: center;
-        }
+        
+        body { font-family: 'Poppins', sans-serif; }
+        table th, table td { text-align: center; vertical-align: middle; }
+        .main-content { margin-left: 250px; padding: 20px; } 
+    
     </style>
 </head>
 
@@ -31,15 +32,23 @@
 
         <!-- Search -->
         <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Search">
+            <form method="GET" action="{{ route('employees.index') }}">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control"
+                        placeholder="Search by name, email, phone, or department" value="{{ request('search') }}">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                </div>
+            </form>
         </div>
         {{-- table --}}
         <div class="card shadow-sm">
             <div class="card-body">
                 <!-- Responsive scroll wrapper -->
                 <div class="table-responsive" style="overflow-x: auto; white-space: nowrap; max-width:100%;">
-                    <table class="table table-bordered table-striped table-hover align-middle">
-                        <thead class="table-light">
+                    <table class="table table-bordered table-striped mt-3">
+                        <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Image</th>

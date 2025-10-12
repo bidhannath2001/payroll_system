@@ -31,7 +31,7 @@ Route::post('/leave-request', [LeaveRequestController::class, 'store'])->name('l
 Route::get('/employee/leave_request_history', [LeaveRequestController::class, 'history'])->name('employee.leave_request_history');
 
 Route::get('/admin/admin',[DashboardController::class, 'admin'])->name('admin.admin');
-
+Route::get('/admin/employees', [EmployeeController::class, 'index'])->name('employees.index');
 Route::get('/admin/create', [EmployeeController::class, 'create'])->name('admin.create');
 
 Route::get('/admin/employee_list', [EmployeeController::class, 'employeeList'])->name('admin.employee_list');
