@@ -29,7 +29,15 @@ class AuthController extends Controller
         if ($user && $user->password_hash) {
             if ($request->password === $user->password_hash) {
                 session(['user' => $user]);
-                return redirect()->route('employee.home');
+                if ($user->role_id == 1) {
+                    return redirect()->route('admin.admin');
+                } 
+                elseif ($user->role_id == 2) {
+                    return redirect()->route('employee.home');
+                } 
+                else {
+                    return redirect()->route('home')->with('warning', 'No role assigned.');
+                }
             } else {
                 return back()->withErrors(['password' => 'Password mismatch']);
             }
