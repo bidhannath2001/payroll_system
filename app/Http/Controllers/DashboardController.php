@@ -14,6 +14,18 @@ class DashboardController extends Controller
         ];
 
         return view('dashboard', compact('userName', 'announcements'));
+        
+
+
+        // // Total salaries (all time)
+        // $totalSalaries = Salary::sum('net_salary'); // assuming you have `net_salary` column
+
+        // // This month salaries
+        // $monthlySalaries = Salary::whereMonth('created_at', now()->month)
+        //                         ->whereYear('created_at', now()->year)
+        //                         ->sum('net_salary');
+
+        // return view('dashboard', compact('totalSalaries', 'monthlySalaries'));
     }
 
 
@@ -27,4 +39,6 @@ class DashboardController extends Controller
 
         return view('admin.admin', compact('totalUsers', 'activeUsers', 'pendingRequests', 'monthlyRevenue', 'adminName'));
     }
+
+
 }

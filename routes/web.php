@@ -94,6 +94,3 @@ Route::prefix('employee/payslip')->group(function () {
     Route::get('/{id}', [EmployeePayslipController::class, 'show'])->name('employee.payslip.show');
     Route::get('/{id}/download', [EmployeePayslipController::class, 'downloadPayslip'])->name('employee.payslip.download');
 });
-
-
-
