@@ -25,7 +25,6 @@ class Employee extends Model
         'role_id',
         'date_joined',
         'status',
-        'available_leave',
         'id_proof',
         'resume'
     ];

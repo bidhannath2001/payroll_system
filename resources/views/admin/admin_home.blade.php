@@ -34,9 +34,16 @@
         <div class="row g-3 mb-4">
             <div class="col-lg-3 col-md-6">
                 <div class="card p-3 shadow-sm summary-card">
-                    <small class="text-muted">Total leave allowance</small>
-                    <h2 class="fw-bold my-2">34</h2>
-                    <div class="d-flex gap-3 text-muted">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <small class="text-muted">Total Employee</small>
+                            <h2 class="fw-bold my-2 mb-0">{{ $totalUsers }}</h2>
+                        </div>
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10" style="width:48px;height:48px;">
+                            <i class="bi bi-people-fill text-primary fs-5"></i>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 text-muted mt-2">
                         <small>Paid: <span>11</span></small>
                         <small>Unpaid: <span>4</span></small>
                     </div>
@@ -44,9 +51,16 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="card p-3 shadow-sm summary-card">
-                    <small class="text-muted">Total leave taken</small>
-                    <h2 class="fw-bold my-2">20</h2>
-                    <div class="d-flex gap-3 text-muted">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <small class="text-muted">Total Active Employee</small>
+                            <h2 class="fw-bold my-2 mb-0">{{ $activeUsers }}</h2>
+                        </div>
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10" style="width:48px;height:48px;">
+                            <i class="bi bi-person-check-fill text-success fs-5"></i>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 text-muted mt-2">
                         <small>Paid: <span>11</span></small>
                         <small>Unpaid: <span>11</span></small>
                     </div>
@@ -54,19 +68,33 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="card p-3 shadow-sm summary-card">
-                    <small class="text-muted">Total leave available</small>
-                    <h2 class="fw-bold my-2">87</h2>
-                    <div class="d-flex gap-3 text-muted">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <small class="text-muted">Total Monthly Cost</small>
+                            <h2 class="fw-bold my-2 mb-0">{{ number_format($monthlycost, 2) }}</h2>
+                        </div>
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10" style="width:48px;height:48px;">
+                            <i class="bi bi-cash-stack text-warning fs-5"></i>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 text-muted mt-2">
                         <small>Paid: <span>50</span></small>
                         <small>Unpaid: <span>51</span></small>
                     </div>
                 </div>
-            </div>
+   8         </div>
             <div class="col-lg-3 col-md-6">
                 <div class="card p-3 shadow-sm summary-card">
-                    <small class="text-muted">Leave request pending</small>
-                    <h2 class="fw-bold my-2">122</h2>
-                    <div class="d-flex gap-3 text-muted">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <small class="text-muted">Total leave request</small>
+                            <h2 class="fw-bold my-2 mb-0">{{ $leaverequests }}</h2>
+                        </div>
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center bg-info bg-opacity-10" style="width:48px;height:48px;">
+                            <i class="bi bi-calendar2-check-fill text-info fs-5"></i>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 text-muted mt-2">
                         <small>Paid: <span>60</span></small>
                         <small>Unpaid: <span>62</span></small>
                     </div>
@@ -109,7 +137,7 @@
                     <div class="progress-bar-container">
                         <div class="d-flex justify-content-between mb-1">
                             <small class="fw-bold">Worked time</small>
-                            <small class="fw-bold">189 hour</small>
+                            <small class="fw-bold">{{ $workinghours }}</small>
                         </div>
                         <div class="progress" role="progressbar" aria-label="Worked time" aria-valuenow="85"
                             aria-valuemin="0" aria-valuemax="100">

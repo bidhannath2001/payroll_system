@@ -28,4 +28,6 @@ class DatabaseSeeder extends Seeder
             BonusDeductionSeeder::class,
         ]);
     }
+
+
 }
