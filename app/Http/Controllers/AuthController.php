@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Attendence;
 use App\Models\Employee;
 use App\Models\User;
@@ -8,14 +9,9 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function index()
-    {
-        $user = session('user');
-    }
 
     public function login()
     {
-        // If already logged in, send them home
         if (session()->has('user')) {
             return redirect()->route('employee.home');
         }
@@ -29,9 +25,7 @@ class AuthController extends Controller
             'email'    => 'required|email',
             'password' => 'required',
         ]);
-
         $user = User::where('username', $request->email)->first();
-
         if ($user && $user->password_hash) {
             if ($request->password === $user->password_hash) {
                 session(['user' => $user]);
@@ -56,21 +50,21 @@ class AuthController extends Controller
         // Get attendance data for current month
         $currentMonth = now()->month;
         $currentYear = now()->year;
-        
-        $attendance = Attendence:: where('employee_id', $employee->employee_id)
+
+        $attendance = Attendence::where('employee_id', $employee->employee_id)
             ->whereMonth('date', $currentMonth)
             ->whereYear('date', $currentYear)
             ->get();
 
         $presentDays = $attendance->where('status', 'Present')->count();
         $absentDays = $attendance->where('status', 'Absent')->count();
-        
+
         // If no attendance records, show default values
         if ($attendance->count() == 0) {
             $presentDays = 30; // Assume 30 days worked if no attendance records
             $absentDays = 0;
         }
-        
+
         // Get last check-in
         $lastCheckIn = Attendence::where('employee_id', $employee->employee_id)
             ->where('status', 'Present')
@@ -144,13 +138,13 @@ class AuthController extends Controller
         if ($request->filled('password_hash')) {
             return redirect()->route('employee.edit_profile')
                 ->with('success', 'Profile updated successfully with new password.');
-        } 
-        else {
+        } else {
             return redirect()->route('employee.edit_profile')
                 ->with('success', 'Profile updated successfully. Your previous password is kept.');
         }
     }
-    public function leave_request(){
+    public function leave_request()
+    {
         return view('employee.leave_request');
     }
 }

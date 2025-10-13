@@ -8,7 +8,6 @@ use App\Models\Employee;
 
 class AttendenceController extends Controller
 {
-    // Show attendance page and list all records
     public function index()
     {
         $attendances = Attendence::with('employee')->orderBy('date', 'desc')->get();

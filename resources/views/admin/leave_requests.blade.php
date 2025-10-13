@@ -35,8 +35,29 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <!-- PENDING REQUESTS -->
-        <div class="mb-5">
+        <div class="container mt-4">
+
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs mb-4" id="leaveTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending"
+                type="button" role="tab">Pending Requests</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="approved-tab" data-bs-toggle="tab" data-bs-target="#approved"
+                type="button" role="tab">Approved Requests</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="rejected-tab" data-bs-toggle="tab" data-bs-target="#rejected"
+                type="button" role="tab">Rejected Requests</button>
+        </li>
+    </ul>
+
+    <!-- Tab Contents -->
+    <div class="tab-content" id="leaveTabsContent">
+
+        <!-- Pending Requests -->
+        <div class="tab-pane fade show active" id="pending" role="tabpanel">
             <h4 class="text-warning mb-3">Pending Requests</h4>
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
@@ -58,21 +79,19 @@
                                 @forelse($pendingRequests as $leave)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $leave->employee->name }}</td>
+                                        <td>{{ $leave->employee->first_name }}</td>
                                         <td>{{ $leave->leave_type }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->start_date)->format('d M Y') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->end_date)->format('d M Y') }}</td>
                                         <td>{{ $leave->reason }}</td>
                                         <td>{{ $leave->employee->available_leave }}</td>
                                         <td>
-                                            <form
-                                                action="{{ route('admin.leave_requests.status', $leave->leave_request_id) }}"
-                                                method="POST" class="d-flex gap-1 justify-content-center">
+                                            <form action="{{ route('admin.leave_requests.status', $leave->leave_request_id) }}"
+                                                  method="POST" class="d-flex gap-1 justify-content-center">
                                                 @csrf
                                                 <button type="submit" name="status" value="approved"
                                                     class="btn btn-outline-success btn-sm" title="Approve">
                                                     <i class="bi bi-check-circle"></i>
-
                                                 </button>
                                                 <button type="submit" name="status" value="rejected"
                                                     class="btn btn-outline-danger btn-sm" title="Reject">
@@ -93,8 +112,8 @@
             </div>
         </div>
 
-        <!-- APPROVED REQUESTS -->
-        <div class="mb-5">
+        <!-- Approved Requests -->
+        <div class="tab-pane fade" id="approved" role="tabpanel">
             <h4 class="text-success mb-3">Approved Requests</h4>
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
@@ -116,14 +135,13 @@
                                 @forelse($approvedRequests as $leave)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $leave->employee->name }}</td>
+                                        <td>{{ $leave->employee->first_name }}</td>
                                         <td>{{ $leave->leave_type }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->start_date)->format('d M Y') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->end_date)->format('d M Y') }}</td>
                                         <td>{{ $leave->reason }}</td>
                                         <td>{{ $leave->employee->available_leave }}</td>
-                                        <td><span class="badge bg-success"><i class="fas fa-check"></i> Approved</span>
-                                        </td>
+                                        <td><span class="badge bg-success"><i class="fas fa-check"></i> Approved</span></td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -137,8 +155,8 @@
             </div>
         </div>
 
-        <!-- REJECTED REQUESTS -->
-        <div class="mb-5">
+        <!-- Rejected Requests -->
+        <div class="tab-pane fade" id="rejected" role="tabpanel">
             <h4 class="text-danger mb-3">Rejected Requests</h4>
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
@@ -160,14 +178,13 @@
                                 @forelse($rejectedRequests as $leave)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $leave->employee->name }}</td>
+                                        <td>{{ $leave->employee->first_name }}</td>
                                         <td>{{ $leave->leave_type }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->start_date)->format('d M Y') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($leave->end_date)->format('d M Y') }}</td>
                                         <td>{{ $leave->reason }}</td>
                                         <td>{{ $leave->employee->available_leave }}</td>
-                                        <td><span class="badge bg-danger"><i class="fas fa-times"></i> Rejected</span>
-                                        </td>
+                                        <td><span class="badge bg-danger"><i class="fas fa-times"></i> Rejected</span></td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -180,7 +197,10 @@
                 </div>
             </div>
         </div>
+
     </div>
+</div>
+
     <style>
         tr,
         th {
@@ -200,6 +220,8 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>

@@ -176,37 +176,37 @@
             <thead>
                 <tr>
                     <th>Description</th>
-                    <th class="text-right">Amount ($)</th>
+                    <th class="text-right">Amount (Tk.)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Basic Salary</td>
-                    <td class="text-right">${{ number_format($salary->basic_salary ?? 0, 2) }}</td>
+                    <td class="text-right">Tk. {{ number_format($salary->basic_salary ?? 0, 2) }}</td>
                 </tr>
                 <tr>
                     <td>Allowances</td>
-                    <td class="text-right">${{ number_format($salary->allowances ?? 0, 2) }}</td>
+                    <td class="text-right">Tk.{{ number_format($salary->allowances ?? 0, 2) }}</td>
                 </tr>
                 <tr>
                     <td>Gross Salary</td>
-                    <td class="text-right">${{ number_format($payroll->gross_salary, 2) }}</td>
+                    <td class="text-right">Tk. {{ number_format($payroll->gross_salary, 2) }}</td>
                 </tr>
                 <tr>
                     <td>Bonuses</td>
-                    <td class="text-right">${{ number_format($payroll->bonuses, 2) }}</td>
+                    <td class="text-right">Tk. {{ number_format($payroll->bonuses, 2) }}</td>
                 </tr>
                 <tr class="total-row">
                     <td><strong>Total Earnings</strong></td>
-                    <td class="text-right"><strong>${{ number_format($payroll->gross_salary + $payroll->bonuses, 2) }}</strong></td>
+                    <td class="text-right"><strong>Tk. {{ number_format($payroll->gross_salary + $payroll->bonuses, 2) }}</strong></td>
                 </tr>
                 <tr>
                     <td>Total Deductions</td>
-                    <td class="text-right">-${{ number_format($payroll->total_deductions, 2) }}</td>
+                    <td class="text-right">Tk. {{ number_format($payroll->total_deductions, 2) }}</td>
                 </tr>
                 <tr class="net-salary-row">
                     <td><strong>NET SALARY</strong></td>
-                    <td class="text-right"><strong>${{ number_format($payroll->net_salary, 2) }}</strong></td>
+                    <td class="text-right"><strong>Tk. {{ number_format($payroll->net_salary, 2) }}</strong></td>
                 </tr>
             </tbody>
         </table>

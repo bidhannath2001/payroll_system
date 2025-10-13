@@ -72,10 +72,10 @@
                                                         <small
                                                             class="text-muted">{{ $salary->employee->designation }}</small>
                                                     </td>
-                                                    <td>${{ number_format($salary->basic_salary, 2) }}</td>
-                                                    <td>${{ number_format($salary->allowances, 2) }}</td>
-                                                    <td>${{ number_format($salary->deductions, 2) }}</td>
-                                                    <td>{{ $salary->tax_percentage }}%</td>
+                                                    <td>Tk. {{ number_format($salary->basic_salary, 2) }}</td>
+                                                    <td>Tk. {{ number_format($salary->allowances, 2) }}</td>
+                                                    <td>Tk. {{ number_format($salary->deductions, 2) }}</td>
+                                                    <td> {{ $salary->tax_percentage }}%</td>
                                                     <td>{{ $salary->created_at->format('M d, Y') }}</td>
                                                     <td>
                                                         <div class="btn-group" role="group">

@@ -21,42 +21,12 @@
             display: flex;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            background: #474751ff;
-            color: #ffffff54;
-            position: sticky;
-            top: 0;
-            left: 0;
-            overflow-y: auto;
-            flex-shrink: 0;
-        }
-
-        .sidebar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .sidebar::-webkit-scrollbar-thumb {
-            background-color: #f2f4f5ff;
-            border-radius: 3px;
-        }
-
-        .sidebar a {
-            color: #fff;
-            text-decoration: none;
-            display: block;
-            padding: 14px 20px;
-            transition: background 0.2s ease;
-        }
-        .sidebar a:hover {
-            background: #fcfdfeff;
-        }
-
         /* Main content */
         .main-container > .card {
             flex: 1;
-            margin: 40px 20px;
+            height: 50vh;
+            width: 50%;
+            margin: 100px 400px;
             border: none;
             border-radius: 12px;
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
@@ -122,7 +92,7 @@
 
 <body>
     <div class="main-container">
-        @include('admin.sidebar')
+        <!-- @include('admin.sidebar') -->
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Generate Payroll</h3>
