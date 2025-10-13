@@ -92,7 +92,6 @@
 
 <body>
     <div class="main-container">
-        <!-- @include('admin.sidebar') -->
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Generate Payroll</h3>

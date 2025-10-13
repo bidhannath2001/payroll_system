@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
     <style>
-        
         body { font-family: 'Poppins', sans-serif; }
         table th, table td { text-align: center; vertical-align: middle; }
         .main-content { margin-left: 250px; padding: 20px; } 
