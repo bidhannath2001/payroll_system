@@ -14,7 +14,7 @@
     <main>
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 mb-4">
             <div class="card p-4 shadow-sm flex-grow-1">
-                <h5 class="fw-bold">Good to see you, Kimi</h5>
+                <h5 class="fw-bold">Hey,Good to see you</h5>
                 <p class="text-muted mb-0">You came 15 minutes early today.</p>
             </div>
             <div class="d-flex gap-3 punch-card p-3">
@@ -30,6 +30,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <div class="row g-3 mb-4">
             <div class="col-lg-3 col-md-6">

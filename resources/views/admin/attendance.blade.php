@@ -71,14 +71,14 @@
                     </select>
                 </div>
                 <div class="col-md-1 d-grid">
-                    <button type="submit" class="btn btn-success">Add</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </div>
             </div>
         </form>
 
         <!-- Attendance Table -->
         <table class="table table-bordered table-striped mt-3">
-            <thead class="table-dark">
+            <thead class="table-white">
                 <tr>
                     <th>#</th>
                     <th>Employee</th>
