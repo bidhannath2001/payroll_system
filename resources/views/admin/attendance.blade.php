@@ -21,7 +21,7 @@
     @include('admin.sidebar')
 
     <div class="main-content">
-        <h2 class="mb-4">Attendance</h2>
+        <h2 class="py-4">Attendance</h2>
          
         <!-- Success Message -->
         @if(session('success'))

@@ -26,7 +26,7 @@
     <div class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-3">
             {{-- <h2 class="mb-4 text-center text-dark">Leave Requests Management</h2> --}}
-            <h3>Leave Requests Management</h3>
+            <h3 class="py-4">Leave Requests Management</h3>
             {{-- <h3>Employee List</h3> --}}
         </div>
 

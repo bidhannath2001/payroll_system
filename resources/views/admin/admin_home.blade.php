@@ -1,26 +1,28 @@
 <div class="main-content">
     <header class="d-flex justify-content-between align-items-center mb-4 p-4 rounded bg-white shadow-sm">
         <h1 class="h3 mb-0">Dashboard</h1>
-        <div class="d-flex align-items-center gap-3">
-            <button class="btn btn-primary">+ Buddy Punching</button>
-            <button class="btn btn-secondary">Manager POV</button>
-            <div class="d-flex align-items-center gap-2">
-                <span class="text-muted">EN</span>
-                <i class="bi bi-bell-fill"></i>
-                <img src="https://via.placeholder.com/40" alt="User" class="rounded-circle">
-            </div>
+        <div class="d-flex align-items-center gap-2">
+            <span class="text-muted small">Welcome, {{ $adminName ?? 'Admin' }}</span>
         </div>
     </header>
     <main>
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 mb-4">
             <div class="card p-4 shadow-sm flex-grow-1">
-                <h5 class="fw-bold">Hey,Good to see you</h5>
-                <p class="text-muted mb-0">You came 15 minutes early today.</p>
+                <div class="d-flex align-items-center">
+                    <img src="{{ $adminPhotoUrl ?? 'https://ui-avatars.com/api/?name=Admin&size=60&background=007bff&color=ffffff' }}" 
+                         alt="{{ $adminName ?? 'Admin' }}" 
+                         class="rounded-circle me-3" 
+                         style="width:60px;height:60px;object-fit:cover;border:3px solid #e9ecef;">
+                    <div>
+                        <h5 class="fw-bold mb-1">Good to see you, {{ $adminName ?? 'Admin' }}</h5>
+                        <p class="text-muted mb-0">You came 15 minutes early today.</p>
+                    </div>
+                </div>
             </div>
             <div class="d-flex gap-3 punch-card p-3">
                 <div class="d-flex flex-column align-items-center">
                     <div class="punch-status-indicator-in mb-2"></div>
-                    <span class="time">7:14 AM</span>
+                    <span class="time">9:00 AM</span>
                     <small class="text-muted">Punch In</small>
                 </div>
                 <div class="d-flex flex-column align-items-center">
@@ -31,153 +33,226 @@
             </div>
         </div>
 
-
-
         <div class="row g-3 mb-4">
             <div class="col-lg-3 col-md-6">
                 <div class="card p-3 shadow-sm summary-card">
-                    <small class="text-muted">Total leave allowance</small>
-                    <h2 class="fw-bold my-2">34</h2>
-                    <div class="d-flex gap-3 text-muted">
-                        <small>Paid: <span>11</span></small>
-                        <small>Unpaid: <span>4</span></small>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <small class="text-muted">Total Employee</small>
+                            <h2 class="fw-bold my-2 mb-0">{{ $totalUsers }}</h2>
+                        </div>
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10" style="width:48px;height:48px;">
+                            <i class="bi bi-people-fill text-primary fs-5"></i>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="card p-3 shadow-sm summary-card">
-                    <small class="text-muted">Total leave taken</small>
-                    <h2 class="fw-bold my-2">20</h2>
-                    <div class="d-flex gap-3 text-muted">
-                        <small>Paid: <span>11</span></small>
-                        <small>Unpaid: <span>11</span></small>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <small class="text-muted">Total Active Employee</small>
+                            <h2 class="fw-bold my-2 mb-0">{{ $activeUsers }}</h2>
+                        </div>
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10" style="width:48px;height:48px;">
+                            <i class="bi bi-person-check-fill text-success fs-5"></i>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="card p-3 shadow-sm summary-card">
-                    <small class="text-muted">Total leave available</small>
-                    <h2 class="fw-bold my-2">87</h2>
-                    <div class="d-flex gap-3 text-muted">
-                        <small>Paid: <span>50</span></small>
-                        <small>Unpaid: <span>51</span></small>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <small class="text-muted">Total Monthly Cost</small>
+                            <h2 class="fw-bold my-2 mb-0">{{ number_format($monthlycost, 2) }}</h2>
+                        </div>
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10" style="width:48px;height:48px;">
+                            <i class="bi bi-cash-stack text-warning fs-5"></i>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="card p-3 shadow-sm summary-card">
-                    <small class="text-muted">Leave request pending</small>
-                    <h2 class="fw-bold my-2">122</h2>
-                    <div class="d-flex gap-3 text-muted">
-                        <small>Paid: <span>60</span></small>
-                        <small>Unpaid: <span>62</span></small>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <small class="text-muted">Total leave request</small>
+                            <h2 class="fw-bold my-2 mb-0">{{ $leaverequests }}</h2>
+                        </div>
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center bg-info bg-opacity-10" style="width:48px;height:48px;">
+                            <i class="bi bi-calendar2-check-fill text-info fs-5"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+            <!-- Salary Breakdown Pie Chart -->
+            <div class="col-md-6">
+                <div class="card p-4 shadow-sm h-100">
+                    <h5 class="card-title border-bottom pb-3 mb-4">Salary Breakdown</h5>
+                    
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="salaryPieChart"></canvas>
+                    </div>
+                    
+                    <!-- Legend -->
+                    <div class="row mt-3">
+                        <div class="col-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle me-2" style="width: 12px; height: 12px; background-color: #28a745;"></div>
+                                <small class="text-muted">🟢 Basic Salary</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle me-2" style="width: 12px; height: 12px; background-color: #007bff;"></div>
+                                <small class="text-muted">🔵 Allowances</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle me-2" style="width: 12px; height: 12px; background-color: #6f42c1;"></div>
+                                <small class="text-muted">🟣 Bonuses</small>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle me-2" style="width: 12px; height: 12px; background-color: #dc3545;"></div>
+                                <small class="text-muted">🔴 Deductions</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employees By Department Chart -->
+            <div class="col-md-6">
+                <div class="card p-4 shadow-sm h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">Employees By Department</h5>
+                        <div class="d-flex align-items-center text-muted">
+                            <i class="bi bi-calendar-week me-1"></i>
+                            <small>This Week</small>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="departmentChart"></canvas>
+                    </div>
+                    
+                    <div class="mt-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-warning rounded-circle me-2" style="width: 8px; height: 8px;"></div>
+                            <small class="text-muted">No of Employees increased by +20% from last Week</small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card p-4 shadow-sm mb-4">
-            <h5 class="card-title border-bottom pb-3 mb-4">Time Log</h5>
-            <div class="row">
-                <div class="col-md-6 border-end">
-                    <h6 class="fw-bold mb-3">Today</h6>
-                    <div class="d-flex gap-4">
-                        <div class="text-center">
-                            <span class="d-block fw-bold">08:00</span>
-                            <small class="text-muted">Punch In</small>
-                        </div>
-                        <div class="text-center">
-                            <span class="d-block fw-bold">12:00</span>
-                            <small class="text-muted">Balance</small>
-                        </div>
-                        <div class="text-center">
-                            <span class="d-block fw-bold">05:00</span>
-                            <small class="text-muted">Worked</small>
-                        </div>
+        <div class="row g-3 mb-4">
+            <!-- Recent Attendance -->
+            <div class="col-md-6">
+                <div class="card p-4 shadow-sm h-100">
+                    <h5 class="card-title border-bottom pb-3 mb-4">Recent Attendance</h5>
+                    <div class="list-group list-group-flush">
+                        @forelse($recentAttendance as $attendance)
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div>
+                                    <h6 class="mb-1">{{ $attendance->employee->first_name }} {{ $attendance->employee->last_name }}</h6>
+                                    <small class="text-muted">{{ \Carbon\Carbon::parse($attendance->date)->format('M d, Y') }}</small>
+                                </div>
+                                <span class="badge bg-{{ $attendance->status == 'Present' ? 'success' : ($attendance->status == 'Absent' ? 'danger' : 'warning') }} rounded-pill">
+                                    {{ $attendance->status }}
+                                </span>
+                            </div>
+                        @empty
+                            <div class="text-center text-muted py-3">
+                                <i class="bi bi-calendar-x fs-1"></i>
+                                <p class="mt-2">No recent attendance records</p>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
-                <div class="col-md-6 ps-4">
-                    <h6 class="fw-bold mb-3">This month</h6>
-                    <div class="progress-bar-container">
-                        <div class="d-flex justify-content-between mb-1">
-                            <small class="fw-bold">Shortage time</small>
-                            <small class="fw-bold">216 hour</small>
+            </div>
+
+            <!-- System Overview -->
+            <div class="col-md-6">
+                <div class="card p-4 shadow-sm h-100">
+                    <h5 class="card-title border-bottom pb-3 mb-4">System Overview</h5>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="text-center p-3 bg-light rounded">
+                                <div class="d-flex align-items-center justify-content-center mb-2">
+                                    <i class="bi bi-building text-primary fs-4"></i>
+                                </div>
+                                <h4 class="text-primary mb-1">{{ $totalDepartments }}</h4>
+                                <small class="text-muted">Departments</small>
+                            </div>
                         </div>
-                        <div class="progress" role="progressbar" aria-label="Shortage time" aria-valuenow="70"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 70%"></div>
+                        <div class="col-6">
+                            <div class="text-center p-3 bg-light rounded">
+                                <div class="d-flex align-items-center justify-content-center mb-2">
+                                    <i class="bi bi-shield-check text-success fs-4"></i>
+                                </div>
+                                <h4 class="text-success mb-1">{{ $totalRoles }}</h4>
+                                <small class="text-muted">Roles</small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="progress-bar-container">
-                        <div class="d-flex justify-content-between mb-1">
-                            <small class="fw-bold">Worked time</small>
-                            <small class="fw-bold">189 hour</small>
+                        <div class="col-6">
+                            <div class="text-center p-3 bg-light rounded">
+                                <div class="d-flex align-items-center justify-content-center mb-2">
+                                    <i class="bi bi-calculator text-warning fs-4"></i>
+                                </div>
+                                <h4 class="text-warning mb-1">{{ $thisMonthPayrolls }}</h4>
+                                <small class="text-muted">This Month Payrolls</small>
+                            </div>
                         </div>
-                        <div class="progress" role="progressbar" aria-label="Worked time" aria-valuenow="85"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-bar-container">
-                        <div class="d-flex justify-content-between mb-1">
-                            <small class="fw-bold">Over time</small>
-                            <small class="fw-bold">56 hour</small>
-                        </div>
-                        <div class="progress" role="progressbar" aria-label="Over time" aria-valuenow="45"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 45%"></div>
+                        <div class="col-6">
+                            <div class="text-center p-3 bg-light rounded">
+                                <div class="d-flex align-items-center justify-content-center mb-2">
+                                    <i class="bi bi-clock text-info fs-4"></i>
+                                </div>
+                                <h4 class="text-info mb-1">{{ $workinghours ?? 0 }}</h4>
+                                <small class="text-muted">Total Hours</small>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Pending Leave Requests -->
         <div class="card p-4 shadow-sm">
-            <h5 class="card-title border-bottom pb-3 mb-4">Announcements</h5>
-            <div class="table-responsive">
-                <table class="table table-hover mb-0">
-                    <thead>
-                        <tr class="text-muted">
-                            <th scope="col">Title</th>
-                            <th scope="col">Start date</th>
-                            <th scope="col">End date</th>
-                            <th scope="col">Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Scrum Master</td>
-                            <td>Dec 4, 2019</td>
-                            <td>Dec 7, 2019</td>
-                            <td>Corrected item alignment.</td>
-                        </tr>
-                        <tr>
-                            <td>Software Tester</td>
-                            <td>Dec 30, 2019</td>
-                            <td>Feb 2, 2019</td>
-                            <td>Embedded analytic scripts.</td>
-                        </tr>
-                        <tr>
-                            <td>Software Developer</td>
-                            <td>Dec 30, 2019</td>
-                            <td>Dec 4, 2019</td>
-                            <td>High resolution imagery option.</td>
-                        </tr>
-                        <tr>
-                            <td>UUUX Designer</td>
-                            <td>Dec 7, 2019</td>
-                            <td>Feb 2, 2019</td>
-                            <td>Enhanced UX for cart quantity updates.</td>
-                        </tr>
-                        <tr>
-                            <td>Ethical Hacker</td>
-                            <td>Mar 20, 2019</td>
-                            <td>Dec 4, 2019</td>
-                            <td>Cart history fixes.</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h5 class="card-title border-bottom pb-3 mb-4">Pending Leave Requests</h5>
+            <div class="list-group list-group-flush">
+                @forelse($pendingLeaveRequests as $leave)
+                    <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <div>
+                            <h6 class="mb-1">{{ $leave->employee->first_name }} {{ $leave->employee->last_name }}</h6>
+                            <small class="text-muted">{{ $leave->leave_type }} - {{ \Carbon\Carbon::parse($leave->start_date)->format('M d') }} to {{ \Carbon\Carbon::parse($leave->end_date)->format('M d') }}</small>
+                        </div>
+                        <span class="badge bg-warning rounded-pill">Pending</span>
+                    </div>
+                @empty
+                    <div class="text-center text-muted py-3">
+                        <i class="bi bi-check-circle fs-1"></i>
+                        <p class="mt-2">No pending leave requests</p>
+                    </div>
+                @endforelse
             </div>
+            @if($pendingLeaveRequests->count() > 0)
+                <div class="mt-3">
+                    <a href="{{ route('admin.leave_requests') }}" class="btn btn-outline-primary btn-sm">View All Requests</a>
+                </div>
+            @endif
         </div>
     </main>
 </div>
