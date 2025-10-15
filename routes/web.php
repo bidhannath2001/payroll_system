@@ -100,5 +100,6 @@ Route::prefix('admin')->group(function () {
         Route::put('/{id}', [BonusDeductionController::class, 'update'])->name('admin.bonus_deduction.update');
         Route::delete('/{id}', [BonusDeductionController::class, 'destroy'])->name('admin.bonus_deduction.destroy');
     });
+
 });
 

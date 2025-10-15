@@ -12,6 +12,8 @@ class AttendenceController extends Controller
     {
         $attendances = Attendence::with('employee')->orderBy('date', 'desc')->get();
         $employees = Employee::all(); // for the form
+        $attendances = Attendence::with('employee',)->paginate(10);
+        
         // dd($employees);
         return view('admin.attendance', compact('attendances', 'employees'));
     }
