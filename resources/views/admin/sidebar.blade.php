@@ -18,7 +18,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('jobdesk.*') ? 'active rounded' : '' }}" href="#">
+                <a class="nav-link {{ request()->routeIs('admin.job.index') ? 'active rounded' : '' }}" href="{{route('admin.job.index')}}">
                     <i class="bi bi-person-workspace me-2"></i>Job Desk
                 </a>
             </li>

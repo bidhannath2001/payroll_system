@@ -1,5 +1,5 @@
 <div class="main-content">
-    <header class="d-flex justify-content-between align-items-center mb-4 p-4 rounded bg-white shadow-sm">
+    <header class="d-flex justify-content-between align-items-center mb-4 p-4 rounded bg-white shadow-sm py-4">
         <h1 class="h3 mb-0">Dashboard</h1>
         <div class="d-flex align-items-center gap-2">
             <span class="text-muted small">Welcome, {{ $adminName ?? 'Admin' }}</span>

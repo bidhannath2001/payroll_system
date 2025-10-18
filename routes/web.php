@@ -10,7 +10,7 @@ use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\BonusDeductionController;
 use App\Http\Controllers\EmployeePayslipController;
-
+use App\Http\Controllers\Admin\JobController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -103,3 +103,10 @@ Route::prefix('admin')->group(function () {
 
 });
 
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/job/create', [JobController::class, 'create'])->name('admin.job.create');
+    Route::post('/job/store', [JobController::class, 'store'])->name('admin.job.store');
+    Route::get('/job', [JobController::class, 'index'])->name('admin.job.index');
+});
