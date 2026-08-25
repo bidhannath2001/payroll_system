@@ -1,5 +1,6 @@
 # Automated Payroll System
-
+[📄 ER Diagram](./payroll_er_diagram.pdf)
+[📄 Final Report](./Final%20report.pdf)
 ## 🗃️ Database Name:
 `payroll_system`
 
